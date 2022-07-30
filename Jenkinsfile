@@ -1,24 +1,13 @@
-pipeline
-{
-    agent none
-    stages
-    {
-        stage('Check docker connection')
-        {
-            agent {label 'jendocker'}
-            steps
-            {
-                sh 'hostname'
-               // sh 'ifconfig -a'
-            }
-        }
-        stage('Check ansible connection')
-        {
-            agent {label 'jenansible'}
-            steps
-            {
-                sh 'hostname'
-               // sh 'ifconfig -a'
+// how to find the ipaddress of the slave in jenkins pipeline
+// https://stackoverflow.com/questions/5272489/how-to-find-the-ipaddress-of-the-slave-in-jenkins-pipeline
+pipeline {
+    agent {
+        label "jendocker"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh "ifconfig -a | grep inet | grep -v"
             }
         }
     }
