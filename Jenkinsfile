@@ -1,13 +1,24 @@
-pipeline 
+pipeline
 {
-    agent{label 'jendocker'}
+    agent none
     stages
     {
-        stage('check')
+        stage('Check docker connection')
         {
+            agent {label 'jendocker'}
             steps
             {
                 sh 'hostname'
+                sh 'ifconfig -a'
+            }
+        }
+        stage('Check ansible connection')
+        {
+            agent {label 'jenansible'}
+            steps
+            {
+                sh 'hostname'
+                sh 'ifconfig -a'
             }
         }
     }
