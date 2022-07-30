@@ -1,13 +1,30 @@
-// how to find the ipaddress of the slave in jenkins pipeline
-// https://stackoverflow.com/questions/5272489/how-to-find-the-ipaddress-of-the-slave-in-jenkins-pipeline
-pipeline {
-    agent {
-        label "jendocker"
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh "ifconfig -a | grep inet | grep -v"
+pipeline 
+{
+    agent none
+    stages
+    {
+        stage('Hello')
+        {
+            agent {label 'jendocker'}
+            steps
+            {
+                sh '''
+                touch file.txt
+                mkdir -p target
+                touch target/file.txt
+                sudo yum install tree -y
+                tree
+                '''
+                stash(name: 'jenkins-stash')
+            }
+        }
+        stage ('check the files')
+        {
+            agent {label 'jenansible'}
+            steps
+            {
+                unstash 'jenkins-stash'
+                sh 'tree'
             }
         }
     }
