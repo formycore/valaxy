@@ -9,7 +9,7 @@ pipeline
             steps
             {
                 sh 'hostname'
-                sh 'ifconfig -a'
+               // sh 'ifconfig -a'
             }
         }
         stage('Check ansible connection')
@@ -18,7 +18,7 @@ pipeline
             steps
             {
                 sh 'hostname'
-                sh 'ifconfig -a'
+               // sh 'ifconfig -a'
             }
         }
     }
