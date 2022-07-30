@@ -1,6 +1,14 @@
-pipeline 
+pipline 
 {
-    agent {label 'jendock'}
-    sh 'echo hostname'
-    sh 'ifconfig -a'
+    agent{label 'jendocker'}
+    stages
+    {
+        stage('check')
+        {
+            steps
+            {
+                sh 'hostname'
+            }
+        }
+    }
 }
