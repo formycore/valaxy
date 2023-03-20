@@ -21,6 +21,9 @@ pipeline {
             }
         }
         stage ("Sonar scanner"){
+            agent {
+                label 'docker'
+            }
             steps {
                 sh 'mvn sonar'
             }
