@@ -1,0 +1,11 @@
+- we have shared libs project and shared libs vars repo 
+pipeline {
+    agent any
+    stages {
+        stage ('check maven'){
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
+}
